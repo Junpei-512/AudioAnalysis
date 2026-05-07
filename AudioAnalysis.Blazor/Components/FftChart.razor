@@ -1,0 +1,59 @@
+@using AudioAnalysis.Core.Models
+
+<div class="chart-wrapper">
+    <div class="fft-info">支配的周波数: <strong>@(Fft?.DominantFrequency.ToString("F1")) Hz</strong></div>
+    <svg viewBox="0 0 @Width @Height" class="fft-svg" preserveAspectRatio="none">
+        @if (Fft?.Magnitudes != null && Fft.Magnitudes.Length > 0)
+        {
+            @RenderBars()
+        }
+    </svg>
+    <div class="fft-axis">
+        <span>0 Hz</span>
+        <span>@(Fft != null && Fft.Frequencies.Length > 0 ? (Fft.Frequencies.Last() / 1000.0).ToString("F1") : "0") kHz</span>
+    </div>
+</div>
+
+@code {
+    [Parameter] public FftResult Fft { get; set; } = new();
+    private const int Width = 1000;
+    private const int Height = 160;
+    private const int MaxDisplayBins = 512;
+    private const double DynamicRangeDb = 80.0; // 表示する dB レンジ
+
+    private RenderFragment RenderBars() => builder =>
+    {
+        if (Fft?.Magnitudes == null) return;
+
+        var mags = Fft.Magnitudes;
+        int count = Math.Min(mags.Length, MaxDisplayBins);
+
+        double maxMag = mags.Take(count).Max();
+        if (maxMag == 0) return;
+
+        double barWidth = (double)Width / count;
+        for (int i = 0; i < count; i++)
+        {
+            // 正しい dB 対数スケール: 最大を 0 dB として -DynamicRangeDb まで表示
+            double db = mags[i] > 0
+                ? 20.0 * Math.Log10(mags[i] / maxMag)
+                : -DynamicRangeDb;
+            double normalized = Math.Clamp((db + DynamicRangeDb) / DynamicRangeDb, 0.0, 1.0);
+
+            double barH = normalized * Height;
+            double x = i * barWidth;
+            double y = Height - barH;
+
+            // 高周波ほど青→紫のグラデーション
+            int hue = 220 + (int)(i * 60.0 / count);
+
+            builder.OpenElement(0, "rect");
+            builder.AddAttribute(1, "x", x.ToString("F1"));
+            builder.AddAttribute(2, "y", y.ToString("F1"));
+            builder.AddAttribute(3, "width", Math.Max(barWidth - 0.3, 0.3).ToString("F2"));
+            builder.AddAttribute(4, "height", barH.ToString("F1"));
+            builder.AddAttribute(5, "fill", $"hsl({hue}, 70%, 55%)");
+            builder.CloseElement();
+        }
+    };
+}

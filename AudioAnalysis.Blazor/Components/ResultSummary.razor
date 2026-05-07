@@ -1,0 +1,27 @@
+@using AudioAnalysis.Core.Models
+
+<div class="summary-cards">
+    <div class="summary-card bpm-card">
+        <div class="card-label">BPM</div>
+        <div class="card-value">@Bpm.Value.ToString("F1")</div>
+        <div class="card-confidence">信頼度: @((Bpm.Confidence * 100).ToString("F0"))%</div>
+        <div class="confidence-bar">
+            <div class="confidence-fill" style="width: @((Bpm.Confidence * 100).ToString("F1"))%"></div>
+        </div>
+    </div>
+
+    <div class="summary-card key-card">
+        <div class="card-label">キー</div>
+        <div class="card-value">@Key.Display</div>
+        <div class="card-confidence">信頼度: @((Key.Confidence * 100).ToString("F0"))%</div>
+        <div class="confidence-bar">
+            <div class="confidence-fill @(Key.Mode == "major" ? "major" : "minor")"
+                 style="width: @((Key.Confidence * 100).ToString("F1"))%"></div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public BpmResult Bpm { get; set; } = new();
+    [Parameter] public KeyResult Key { get; set; } = new();
+}

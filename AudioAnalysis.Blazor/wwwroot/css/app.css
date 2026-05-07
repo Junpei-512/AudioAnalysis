@@ -1,0 +1,488 @@
+/* === Base === */
+:root {
+    --bg: #0f1117;
+    --surface: #1c1f2e;
+    --surface2: #252838;
+    --accent: #4a9eff;
+    --accent2: #7c5cbf;
+    --text: #e8eaf6;
+    --text-dim: #8888aa;
+    --border: #2d3050;
+    --danger: #ff6b6b;
+    --success: #4ade80;
+}
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+}
+
+h1:focus { outline: none; }
+
+/* === Layout === */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* === Upload page === */
+.title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+}
+
+.upload-card {
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: var(--surface);
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 1.5rem;
+}
+
+.upload-card.drag-over {
+    border-color: var(--accent);
+    background: rgba(74, 158, 255, 0.05);
+}
+
+.upload-icon { font-size: 3rem; margin-bottom: 1rem; }
+.upload-text { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.upload-hint { color: var(--text-dim); margin-bottom: 1rem; }
+
+.file-input { display: none; }
+
+.selected-file {
+    margin-top: 1rem;
+    color: var(--success);
+    font-size: 0.95rem;
+}
+
+.options-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.options-card h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    align-items: end;
+}
+
+.option label { display: block; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.4rem; }
+
+.select, .input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.checkbox-label {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem !important;
+    color: var(--text) !important;
+    margin-bottom: 0 !important;
+}
+
+/* === Buttons === */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: opacity 0.15s;
+}
+
+.btn:hover { opacity: 0.85; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn-analyze {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.75rem 2.5rem;
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.btn-back {
+    background: var(--surface2);
+    color: var(--text);
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+}
+
+/* === States === */
+.loading-box {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-dim);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-box {
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* === Result page === */
+.result-page { padding-top: 1.5rem; }
+
+.result-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.result-header h1 {
+    font-size: 1.6rem;
+    margin: 0;
+    flex: 1;
+}
+
+.meta {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+}
+
+/* === Summary cards === */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.card-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+}
+
+.card-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.key-card .card-value { color: var(--accent2); }
+
+.card-confidence {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+}
+
+.confidence-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.6s ease;
+}
+
+.confidence-fill.minor { background: var(--accent2); }
+
+/* === Charts grid === */
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.chart-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.chart-section.full-width { grid-column: 1 / -1; }
+
+.chart-section h2 {
+    font-size: 1rem;
+    margin: 0 0 1rem;
+    color: var(--text-dim);
+}
+
+/* === Waveform === */
+.chart-wrapper { width: 100%; }
+.waveform-svg { width: 100%; height: 120px; background: var(--bg); border-radius: 6px; }
+.chart-meta { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.5rem; }
+
+/* === FFT === */
+.fft-svg { width: 100%; height: 160px; background: var(--bg); border-radius: 6px; }
+.fft-info, .harmonics-info { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+.fft-axis { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-dim); margin-top: 0.25rem; }
+
+/* === Harmonics === */
+.harmonic-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+}
+
+.harmonic-label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    min-width: 140px;
+}
+
+.harmonic-bar-bg {
+    flex: 1;
+    height: 14px;
+    background: var(--bg);
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.harmonic-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 7px;
+    transition: width 0.5s ease;
+}
+
+.harmonic-value {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    min-width: 45px;
+    text-align: right;
+}
+
+/* === Tonality === */
+.tonality-wrapper { padding: 0.5rem 0; }
+
+.overall-key {
+    font-size: 1rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+}
+
+.overall-key strong { color: var(--text); }
+
+.timeline {
+    position: relative;
+    height: 48px;
+    background: var(--bg);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-section {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    transition: opacity 0.2s;
+}
+
+.timeline-section:hover { opacity: 0.85; }
+
+.section-label {
+    font-size: 0.7rem;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+}
+
+.timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+}
+
+.ai-comment {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem;
+    margin-top: 0.5rem;
+}
+
+.ai-label {
+    font-size: 0.75rem;
+    color: var(--accent2);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.ai-comment p { margin: 0; font-size: 0.9rem; line-height: 1.6; }
+
+/* === Sidebar/nav === */
+.navbar { background: var(--surface) !important; border-bottom: 1px solid var(--border); }
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .charts-grid { grid-template-columns: 1fr; }
+    .chart-section.full-width { grid-column: 1; }
+    .result-header { flex-direction: column; align-items: flex-start; }
+}
+
+/* === Blazor system === */
+#blazor-error-ui {
+    background: rgba(255,107,107,0.9);
+    bottom: 0; left: 0;
+    padding: 0.6rem 1.25rem 0.7rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    display: none;
+    color: white;
+}
+
+.loading-progress {
+    position: relative;
+    display: block;
+    width: 8rem; height: 8rem;
+    margin: 20vh auto 1rem;
+}
+
+.loading-progress circle {
+    fill: none;
+    stroke: #333;
+    stroke-width: 0.6rem;
+    transform-origin: 50% 50%;
+    transform: rotate(-90deg);
+}
+
+.loading-progress circle:last-child {
+    stroke: var(--accent);
+    stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
+    transition: stroke-dasharray 0.05s ease-in-out;
+}
+
+.loading-progress-text {
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+}
+
+.loading-progress-text:after {
+    content: var(--blazor-load-percentage-text, "Loading");
+}
+
+/* === Audio Player === */
+.preview-player {
+    margin-top: 1.25rem;
+}
+
+.audio-player-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.player-label {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
+}
+
+.audio-control {
+    flex: 1;
+    min-width: 200px;
+    height: 36px;
+    border-radius: 8px;
+    accent-color: var(--accent);
+    /* ブラウザデフォルトのスタイルを上書き */
+    filter: invert(0.1) hue-rotate(200deg) brightness(1.1);
+}

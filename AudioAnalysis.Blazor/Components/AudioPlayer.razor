@@ -1,0 +1,26 @@
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<div class="audio-player-card">
+    <div class="player-label">🎧 @FileName</div>
+    <audio id="resultAudio" controls preload="none" class="audio-control"></audio>
+</div>
+
+@code {
+    [Parameter] public string FileName { get; set; } = string.Empty;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Index ページで作成した blob URL を適用する
+            await JS.InvokeVoidAsync("audioPlayer.applySavedUrl", "resultAudio");
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        // ページを離れても URL は保持したまま（別ページで再利用する可能性がある）
+        await Task.CompletedTask;
+    }
+}

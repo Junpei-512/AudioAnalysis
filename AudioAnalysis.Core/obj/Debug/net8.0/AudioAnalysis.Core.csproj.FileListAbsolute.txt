@@ -1,0 +1,11 @@
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/bin/Debug/net8.0/AudioAnalysis.Core.deps.json
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/bin/Debug/net8.0/AudioAnalysis.Core.dll
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/bin/Debug/net8.0/AudioAnalysis.Core.pdb
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/AudioAnalysis.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/AudioAnalysis.Core.AssemblyInfoInputs.cache
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/AudioAnalysis.Core.AssemblyInfo.cs
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/AudioAnalysis.Core.csproj.CoreCompileInputs.cache
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/AudioAnalysis.Core.dll
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/refint/AudioAnalysis.Core.dll
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/AudioAnalysis.Core.pdb
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/ref/AudioAnalysis.Core.dll

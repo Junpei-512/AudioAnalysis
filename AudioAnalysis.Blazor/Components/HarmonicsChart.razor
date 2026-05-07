@@ -1,0 +1,25 @@
+@using AudioAnalysis.Core.Models
+
+<div class="chart-wrapper">
+    <div class="harmonics-info">基音: <strong>@Harmonics?.Fundamental.ToString("F1") Hz</strong></div>
+    <div class="harmonics-bars">
+        @if (Harmonics?.Partials != null)
+        {
+            @foreach (var partial in Harmonics.Partials)
+            {
+                <div class="harmonic-row">
+                    <span class="harmonic-label">H@(partial.Harmonic) (@partial.Frequency.ToString("F0") Hz)</span>
+                    <div class="harmonic-bar-bg">
+                        <div class="harmonic-bar-fill"
+                             style="width: @((partial.Magnitude * 100).ToString("F1"))%"></div>
+                    </div>
+                    <span class="harmonic-value">@(partial.Magnitude.ToString("F3"))</span>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public HarmonicsResult Harmonics { get; set; } = new();
+}

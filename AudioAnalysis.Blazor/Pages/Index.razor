@@ -1,0 +1,140 @@
+@page "/"
+@using AudioAnalysis.Blazor.Services
+@using AudioAnalysis.Core.Models
+@inject AudioApiClient ApiClient
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<PageTitle>オーディオ解析</PageTitle>
+
+<div class="container">
+    <h1 class="title">🎵 オーディオ解析</h1>
+    <p class="subtitle">MP3・WAV・FLAC・OGG ファイルをアップロードして、BPM・キー・FFT・波形・倍音・調性を解析します</p>
+
+    <div class="upload-card @(isDragging ? "drag-over" : "")"
+         @ondragenter="OnDragEnter"
+         @ondragleave="OnDragLeave"
+         @ondragover:preventDefault="true"
+         @ondrop="OnDrop"
+         @ondrop:preventDefault="true">
+
+        <div class="upload-icon">🎼</div>
+        <p class="upload-text">ここにファイルをドラッグ＆ドロップ</p>
+        <p class="upload-hint">または</p>
+        <InputFile OnChange="OnFileSelected" accept=".mp3,.wav,.flac,.ogg"
+                   class="file-input" id="fileInput" />
+        <label for="fileInput" class="btn btn-primary">ファイルを選択</label>
+
+        @if (selectedFileName != null)
+        {
+            <p class="selected-file">選択中: <strong>@selectedFileName</strong></p>
+
+            <!-- プレビュープレーヤー -->
+            <div class="preview-player">
+                <audio id="previewAudio" controls preload="none" class="audio-control"></audio>
+            </div>
+        }
+    </div>
+
+    <div class="options-card">
+        <h3>解析オプション</h3>
+        <div class="options-grid">
+            <div class="option">
+                <label>FFT サイズ</label>
+                <select @bind="fftSize" class="select">
+                    <option value="1024">1024</option>
+                    <option value="2048">2048</option>
+                    <option value="4096">4096 (推奨)</option>
+                    <option value="8192">8192</option>
+                </select>
+            </div>
+            <div class="option">
+                <label>波形データ点数</label>
+                <input type="number" @bind="waveformPoints" min="100" max="5000" class="input" />
+            </div>
+            <div class="option">
+                <label class="checkbox-label">
+                    <input type="checkbox" @bind="includeAiComment" />
+                    AI による調性解説を含める
+                </label>
+            </div>
+        </div>
+    </div>
+
+    @if (errorMessage != null)
+    {
+        <div class="error-box">⚠️ @errorMessage</div>
+    }
+
+    @if (isAnalyzing)
+    {
+        <div class="loading-box">
+            <div class="spinner"></div>
+            <p>解析中... しばらくお待ちください</p>
+        </div>
+    }
+    else if (selectedFile != null)
+    {
+        <button class="btn btn-analyze" @onclick="StartAnalysis">
+            🔍 解析開始
+        </button>
+    }
+</div>
+
+@code {
+    private IBrowserFile? selectedFile;
+    private string? selectedFileName;
+    private bool isDragging;
+    private bool isAnalyzing;
+    private string? errorMessage;
+    private int fftSize = 4096;
+    private int waveformPoints = 1000;
+    private bool includeAiComment = false;
+
+    private async Task OnFileSelected(InputFileChangeEventArgs e)
+    {
+        selectedFile = e.File;
+        selectedFileName = e.File.Name;
+        errorMessage = null;
+
+        // Blazor が DOM を更新した後に JS を呼ぶ
+        await Task.Yield();
+        await JS.InvokeVoidAsync("audioPlayer.setSourceFromInput", "fileInput", "previewAudio");
+    }
+
+    private void OnDragEnter() => isDragging = true;
+    private void OnDragLeave() => isDragging = false;
+    private void OnDrop(DragEventArgs e) => isDragging = false;
+
+    private async Task StartAnalysis()
+    {
+        if (selectedFile == null) return;
+
+        isAnalyzing = true;
+        errorMessage = null;
+
+        try
+        {
+            const long maxSize = 52_428_800;
+            await using var stream = selectedFile.OpenReadStream(maxSize);
+            var result = await ApiClient.AnalyzeAsync(
+                stream,
+                selectedFile.Name,
+                fftSize,
+                waveformPoints,
+                includeAiComment);
+
+            AnalysisResultStore.Current = result;
+            // blob URL は JS 側に保持されているので Result ページで再利用できる
+            Nav.NavigateTo("/result");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"解析エラー: {ex.Message}";
+        }
+        finally
+        {
+            isAnalyzing = false;
+        }
+    }
+}

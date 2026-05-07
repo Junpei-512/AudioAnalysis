@@ -1,0 +1,74 @@
+@page "/result"
+@using AudioAnalysis.Blazor.Components
+@using AudioAnalysis.Blazor.Services
+@using AudioAnalysis.Core.Models
+@inject NavigationManager Nav
+
+<PageTitle>解析結果</PageTitle>
+
+@if (result == null)
+{
+    <div class="container">
+        <p>解析結果がありません。<a href="/">トップへ戻る</a></p>
+    </div>
+}
+else
+{
+    <div class="container result-page">
+        <div class="result-header">
+            <h1>🎵 @result.FileName</h1>
+            <div class="meta">
+                <span>⏱ @FormatDuration(result.DurationSeconds)</span>
+                <span>🎚 @result.SampleRate Hz</span>
+                <span>⚡ 処理時間: @result.ProcessingTimeMs ms</span>
+            </div>
+            <a href="/" class="btn btn-back">← 別のファイルを解析</a>
+        </div>
+
+        <!-- 再生プレーヤー -->
+        <AudioPlayer FileName="@result.FileName" />
+
+        <ResultSummary Bpm="result.Bpm" Key="result.Key" />
+
+        <div class="charts-grid">
+            <div class="chart-section">
+                <h2>📊 波形</h2>
+                <WaveformChart Waveform="result.Waveform" />
+            </div>
+
+            <div class="chart-section">
+                <h2>📈 FFT スペクトル</h2>
+                <FftChart Fft="result.Fft" />
+            </div>
+
+            <div class="chart-section">
+                <h2>🎸 倍音解析</h2>
+                <HarmonicsChart Harmonics="result.Harmonics" />
+            </div>
+
+            <div class="chart-section full-width">
+                <h2>🎹 調性タイムライン</h2>
+                <TonalityTimeline Tonality="result.Tonality" />
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private AudioAnalysisResult? result;
+
+    protected override void OnInitialized()
+    {
+        result = AnalysisResultStore.Current;
+        if (result == null)
+            Nav.NavigateTo("/");
+    }
+
+    private static string FormatDuration(double seconds)
+    {
+        var ts = TimeSpan.FromSeconds(seconds);
+        return ts.TotalHours >= 1
+            ? $"{(int)ts.TotalHours}:{ts.Minutes:D2}:{ts.Seconds:D2}"
+            : $"{ts.Minutes}:{ts.Seconds:D2}";
+    }
+}

@@ -1,0 +1,71 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = AudioAnalysis.Blazor
+build_property.RootNamespace = AudioAnalysis.Blazor
+build_property.ProjectDir = /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Components/AudioPlayer.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BdWRpb1BsYXllci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Components/FftChart.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9GZnRDaGFydC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Components/HarmonicsChart.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9IYXJtb25pY3NDaGFydC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Components/ResultSummary.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9SZXN1bHRTdW1tYXJ5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Components/TonalityTimeline.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Ub25hbGl0eVRpbWVsaW5lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Components/WaveformChart.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9XYXZlZm9ybUNoYXJ0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Pages/Result.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmVzdWx0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L01haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-8pw3ywx0kq
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L05hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-phq89sfr2k

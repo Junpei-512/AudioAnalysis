@@ -1,0 +1,48 @@
+@using AudioAnalysis.Core.Models
+
+<div class="tonality-wrapper">
+    <div class="overall-key">全体のキー: <strong>@Tonality?.OverallKey</strong></div>
+
+    @if (Tonality?.Sections != null && Tonality.Sections.Count > 0)
+    {
+        double totalDuration = Tonality.Sections.LastOrDefault()?.EndSec ?? 1;
+        <div class="timeline">
+            @foreach (var seg in Tonality.Sections)
+            {
+                double left = seg.StartSec / totalDuration * 100;
+                double width = (seg.EndSec - seg.StartSec) / totalDuration * 100;
+                <div class="timeline-section"
+                     style="left: @(left.ToString("F1"))%; width: @(width.ToString("F1"))%; background: @GetKeyColor(seg.Key)"
+                     title="@seg.Key (@seg.StartSec.ToString("F0")s - @seg.EndSec.ToString("F0")s)">
+                    <span class="section-label">@seg.Key</span>
+                </div>
+            }
+        </div>
+        <div class="timeline-labels">
+            @foreach (var seg in Tonality.Sections)
+            {
+                <span>@seg.StartSec.ToString("F0")s</span>
+            }
+            <span>@Tonality.Sections.Last().EndSec.ToString("F0")s</span>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Tonality?.AiComment))
+    {
+        <div class="ai-comment">
+            <div class="ai-label">🤖 AI 解説</div>
+            <p>@Tonality.AiComment</p>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public TonalityResult Tonality { get; set; } = new();
+
+    private static string GetKeyColor(string key)
+    {
+        if (key.Contains("major")) return "rgba(74, 158, 255, 0.7)";
+        if (key.Contains("minor")) return "rgba(255, 100, 100, 0.7)";
+        return "rgba(120, 200, 120, 0.7)";
+    }
+}

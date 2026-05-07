@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioAnalysis.Core", "AudioAnalysis.Core\AudioAnalysis.Core.csproj", "{93B16F62-2C1E-4633-8F2C-537F1AFB96B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioAnalysis.Api", "AudioAnalysis.Api\AudioAnalysis.Api.csproj", "{8455BB54-10C9-4B2F-9463-29BE9A19DD61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioAnalysis.Blazor", "AudioAnalysis.Blazor\AudioAnalysis.Blazor.csproj", "{A7EF5293-50F1-45B4-92A4-4A9A6482DD03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioAnalysis.Tests", "AudioAnalysis.Tests\AudioAnalysis.Tests.csproj", "{5FBA4647-1377-463D-892D-404512669572}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93B16F62-2C1E-4633-8F2C-537F1AFB96B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93B16F62-2C1E-4633-8F2C-537F1AFB96B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93B16F62-2C1E-4633-8F2C-537F1AFB96B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93B16F62-2C1E-4633-8F2C-537F1AFB96B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8455BB54-10C9-4B2F-9463-29BE9A19DD61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8455BB54-10C9-4B2F-9463-29BE9A19DD61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8455BB54-10C9-4B2F-9463-29BE9A19DD61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8455BB54-10C9-4B2F-9463-29BE9A19DD61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7EF5293-50F1-45B4-92A4-4A9A6482DD03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7EF5293-50F1-45B4-92A4-4A9A6482DD03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7EF5293-50F1-45B4-92A4-4A9A6482DD03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7EF5293-50F1-45B4-92A4-4A9A6482DD03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FBA4647-1377-463D-892D-404512669572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FBA4647-1377-463D-892D-404512669572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FBA4647-1377-463D-892D-404512669572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FBA4647-1377-463D-892D-404512669572}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
