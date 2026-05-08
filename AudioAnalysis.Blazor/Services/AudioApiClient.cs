@@ -1,4 +1,5 @@
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using AudioAnalysis.Core.Models;
 using System.Text.Json;
 
@@ -37,6 +38,19 @@ public class AudioApiClient
         var json = await response.Content.ReadAsStringAsync(ct);
         return JsonSerializer.Deserialize<AudioAnalysisResult>(json, JsonOpts)
                ?? throw new InvalidOperationException("Empty response from API");
+    }
+
+    public async Task<AiCommentResponse> GetAiCommentAsync(
+        string overallKey,
+        List<string> sectionKeys,
+        CancellationToken ct = default)
+    {
+        var req = new AiCommentRequest { OverallKey = overallKey, SectionKeys = sectionKeys };
+        var response = await _http.PostAsJsonAsync("api/audio/ai-comment", req, ct);
+        response.EnsureSuccessStatusCode();
+        var json = await response.Content.ReadAsStringAsync(ct);
+        return JsonSerializer.Deserialize<AiCommentResponse>(json, JsonOpts)
+               ?? new AiCommentResponse { Available = false };
     }
 
     private static string GetMimeType(string fileName)

@@ -105,6 +105,7 @@ builder.Services.AddScoped<IWaveformExtractor, WaveformExtractor>();
 builder.Services.AddScoped<IHarmonicsAnalyzer, HarmonicsAnalyzer>();
 builder.Services.AddScoped<ITonalityAnalyzer, TonalityAnalyzer>();
 builder.Services.AddScoped<IAudioAnalysisService, AudioAnalysisService>();
+builder.Services.AddSingleton<IAiCommentService, AiCommentService>();
 
 builder.WebHost.ConfigureKestrel(opts =>
 {

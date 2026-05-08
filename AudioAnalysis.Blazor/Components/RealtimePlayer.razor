@@ -1,0 +1,55 @@
+@using AudioAnalysis.Core.Models
+@using System.Text.Json
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<div class="realtime-player-card">
+    <div class="player-top">
+        <span class="player-filename">🎧 @FileName</span>
+        <audio id="mainAudio" controls preload="auto" class="audio-control-main"></audio>
+    </div>
+
+    <div class="live-charts">
+        <div class="live-chart-box">
+            <div class="live-label"><span class="live-dot"></span> LIVE 波形</div>
+            <canvas id="liveWaveCanvas" class="live-canvas"></canvas>
+        </div>
+        <div class="live-chart-box">
+            <div class="live-label"><span class="live-dot"></span> LIVE FFT</div>
+            <canvas id="liveFftCanvas" class="live-canvas"></canvas>
+        </div>
+        <div class="live-chart-box live-harm-box">
+            <div class="live-label"><span class="live-dot"></span> LIVE 倍音解析 (HPS)</div>
+            <canvas id="liveHarmCanvas" class="live-canvas live-canvas-harm"></canvas>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string FileName { get; set; } = string.Empty;
+    [Parameter] public List<TonalSection> Sections { get; set; } = [];
+    [Parameter] public double DurationSeconds { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        var sectionsJson = JsonSerializer.Serialize(
+            Sections.Select(s => new { startSec = s.StartSec, endSec = s.EndSec }));
+
+        await JS.InvokeVoidAsync(
+            "realtimeAnalyzer.init",
+            "mainAudio",
+            "liveWaveCanvas",
+            "liveFftCanvas",
+            "liveHarmCanvas",
+            sectionsJson,
+            DurationSeconds);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try { await JS.InvokeVoidAsync("realtimeAnalyzer.dispose"); }
+        catch { }
+    }
+}

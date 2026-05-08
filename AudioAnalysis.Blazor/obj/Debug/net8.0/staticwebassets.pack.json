@@ -45,6 +45,10 @@
       "PackagePath": "staticwebassets/js/audioPlayer.js"
     },
     {
+      "Id": "/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/wwwroot/js/realtime.js",
+      "PackagePath": "staticwebassets/js/realtime.js"
+    },
+    {
       "Id": "/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/wwwroot/sample-data/weather.json",
       "PackagePath": "staticwebassets/sample-data/weather.json"
     },

@@ -136,3 +136,4 @@
 /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Tests/obj/Debug/net8.0/ref/AudioAnalysis.Tests.dll
 /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Tests/bin/Debug/net8.0/NLayer.dll
 /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Tests/bin/Debug/net8.0/NLayer.NAudioSupport.dll
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Tests/obj/Debug/net8.0/AudioAnalysis.Tests.sourcelink.json

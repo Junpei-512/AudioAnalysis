@@ -9,3 +9,4 @@
 /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/refint/AudioAnalysis.Core.dll
 /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/AudioAnalysis.Core.pdb
 /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/ref/AudioAnalysis.Core.dll
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Core/obj/Debug/net8.0/AudioAnalysis.Core.sourcelink.json

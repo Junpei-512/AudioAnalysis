@@ -12,16 +12,26 @@
 
     <div class="summary-card key-card">
         <div class="card-label">キー</div>
-        <div class="card-value">@Key.Display</div>
+        <div class="card-value">@displayKey</div>
         <div class="card-confidence">信頼度: @((Key.Confidence * 100).ToString("F0"))%</div>
         <div class="confidence-bar">
             <div class="confidence-fill @(Key.Mode == "major" ? "major" : "minor")"
                  style="width: @((Key.Confidence * 100).ToString("F1"))%"></div>
         </div>
+        <KeyFeedback DetectedKey="@Key.Display"
+                     OnCorrected="OnKeyCorrected" />
     </div>
 </div>
 
 @code {
     [Parameter] public BpmResult Bpm { get; set; } = new();
     [Parameter] public KeyResult Key { get; set; } = new();
+
+    private string displayKey = string.Empty;
+
+    protected override void OnParametersSet()
+        => displayKey = Key.Display;
+
+    private void OnKeyCorrected(string corrected)
+        => displayKey = corrected;
 }

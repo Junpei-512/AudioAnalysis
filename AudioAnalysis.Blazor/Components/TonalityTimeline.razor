@@ -1,4 +1,5 @@
 @using AudioAnalysis.Core.Models
+@inject Services.AudioApiClient ApiClient
 
 <div class="tonality-wrapper">
     <div class="overall-key">全体のキー: <strong>@Tonality?.OverallKey</strong></div>
@@ -9,11 +10,12 @@
         <div class="timeline">
             @foreach (var seg in Tonality.Sections)
             {
-                double left = seg.StartSec / totalDuration * 100;
+                double left  = seg.StartSec / totalDuration * 100;
                 double width = (seg.EndSec - seg.StartSec) / totalDuration * 100;
                 <div class="timeline-section"
                      style="left: @(left.ToString("F1"))%; width: @(width.ToString("F1"))%; background: @GetKeyColor(seg.Key)"
-                     title="@seg.Key (@seg.StartSec.ToString("F0")s - @seg.EndSec.ToString("F0")s)">
+                     title="@seg.Key (@seg.StartSec.ToString("F0")s - @seg.EndSec.ToString("F0")s)"
+                     data-start="@seg.StartSec" data-end="@seg.EndSec">
                     <span class="section-label">@seg.Key</span>
                 </div>
             }
@@ -27,17 +29,89 @@
         </div>
     }
 
-    @if (!string.IsNullOrEmpty(Tonality?.AiComment))
-    {
-        <div class="ai-comment">
-            <div class="ai-label">🤖 AI 解説</div>
-            <p>@Tonality.AiComment</p>
-        </div>
-    }
+    <!-- AI 調性解説 -->
+    <div class="ai-section">
+        @if (!string.IsNullOrEmpty(aiComment))
+        {
+            <div class="ai-comment">
+                <div class="ai-label">🤖 AI 解説</div>
+                <p>@aiComment</p>
+            </div>
+        }
+        else if (aiUnavailable)
+        {
+            <div class="ai-unavailable">
+                ⚠️ @unavailableReason
+                <a href="https://console.anthropic.com/settings/keys" target="_blank">APIキーを取得 →</a>
+                <br /><small>取得後 <code>appsettings.json</code> の <code>Anthropic:ApiKey</code> に設定してください。</small>
+            </div>
+        }
+        else
+        {
+            <button class="btn btn-ai @(isGenerating ? "btn-ai-loading" : "")"
+                    @onclick="GenerateComment"
+                    disabled="@isGenerating">
+                @if (isGenerating)
+                {
+                    <span class="spinner-sm"></span>
+                    <span>生成中...</span>
+                }
+                else
+                {
+                    <span>🤖 AI による調性解説を生成</span>
+                }
+            </button>
+        }
+    </div>
 </div>
 
 @code {
     [Parameter] public TonalityResult Tonality { get; set; } = new();
+
+    private string? aiComment;
+    private bool isGenerating;
+    private bool aiUnavailable;
+    private string? unavailableReason;
+
+    protected override void OnParametersSet()
+    {
+        // サーバー解析時に既に取得済みの場合はそのまま表示
+        if (!string.IsNullOrEmpty(Tonality?.AiComment))
+            aiComment = Tonality.AiComment;
+    }
+
+    private async Task GenerateComment()
+    {
+        if (Tonality == null || isGenerating) return;
+
+        isGenerating = true;
+        aiUnavailable = false;
+
+        try
+        {
+            var sectionKeys = Tonality.Sections.Select(s => s.Key).ToList();
+            var result = await ApiClient.GetAiCommentAsync(Tonality.OverallKey, sectionKeys);
+
+            if (!result.Available)
+            {
+                aiUnavailable = true;
+                unavailableReason = result.UnavailableReason;
+            }
+            else
+            {
+                aiComment = result.Comment ?? "（コメントを取得できませんでした）";
+            }
+        }
+        catch (Exception ex)
+        {
+            aiUnavailable = true;
+            unavailableReason = $"エラー: {ex.Message}";
+        }
+        finally
+        {
+            isGenerating = false;
+        }
+    }
 
     private static string GetKeyColor(string key)
     {

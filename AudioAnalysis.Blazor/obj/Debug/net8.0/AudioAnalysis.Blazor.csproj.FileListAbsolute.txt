@@ -1038,3 +1038,4 @@
 /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/obj/Debug/net8.0/refint/AudioAnalysis.Blazor.dll
 /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/obj/Debug/net8.0/AudioAnalysis.Blazor.pdb
 /Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/obj/Debug/net8.0/ref/AudioAnalysis.Blazor.dll
+/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/obj/Debug/net8.0/AudioAnalysis.Blazor.sourcelink.json

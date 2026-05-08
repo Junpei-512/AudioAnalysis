@@ -38,6 +38,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9IYXJtb25pY3NDaGFydC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Components/KeyFeedback.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9LZXlGZWVkYmFjay5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Components/RealtimePlayer.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9SZWFsdGltZVBsYXllci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/Components/ResultSummary.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9SZXN1bHRTdW1tYXJ5LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 

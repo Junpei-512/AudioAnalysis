@@ -25,14 +25,16 @@ else
             <a href="/" class="btn btn-back">← 別のファイルを解析</a>
         </div>
 
-        <!-- 再生プレーヤー -->
-        <AudioPlayer FileName="@result.FileName" />
+        <!-- リアルタイムプレーヤー (再生 + ライブ波形・FFT) -->
+        <RealtimePlayer FileName="@result.FileName"
+                        Sections="result.Tonality.Sections"
+                        DurationSeconds="result.DurationSeconds" />
 
         <ResultSummary Bpm="result.Bpm" Key="result.Key" />
 
         <div class="charts-grid">
             <div class="chart-section">
-                <h2>📊 波形</h2>
+                <h2>📊 波形 <span class="playhead-hint">▶ 再生中は赤線が進みます</span></h2>
                 <WaveformChart Waveform="result.Waveform" />
             </div>
 
@@ -47,7 +49,7 @@ else
             </div>
 
             <div class="chart-section full-width">
-                <h2>🎹 調性タイムライン</h2>
+                <h2>🎹 調性タイムライン <span class="playhead-hint">▶ 再生中は現在位置をハイライト</span></h2>
                 <TonalityTimeline Tonality="result.Tonality" />
             </div>
         </div>

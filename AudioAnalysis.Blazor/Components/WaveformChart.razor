@@ -2,11 +2,22 @@
 
 <div class="chart-wrapper">
     <svg viewBox="0 0 @Width @Height" class="waveform-svg" preserveAspectRatio="none">
-        <line x1="0" y1="@(Height/2)" x2="@Width" y2="@(Height/2)" stroke="#444" stroke-width="0.5" />
+        <!-- センターライン -->
+        <line x1="0" y1="@(Height/2)" x2="@Width" y2="@(Height/2)"
+              stroke="#2d3050" stroke-width="0.5" />
+
+        <!-- 静的波形 -->
         @if (Waveform?.Amplitudes != null && Waveform.Amplitudes.Length > 0)
         {
             <polyline points="@BuildPoints()" fill="none" stroke="#4a9eff" stroke-width="1" />
         }
+
+        <!-- 再生ヘッド (JS が currentTime に合わせて x を更新) -->
+        <line id="wavePlayhead"
+              x1="0" y1="0" x2="0" y2="@Height"
+              stroke="#ff6b6b" stroke-width="1.5"
+              stroke-linecap="round"
+              opacity="0" />
     </svg>
     <div class="chart-meta">RMS: @Waveform?.Rms.ToString("F4")</div>
 </div>

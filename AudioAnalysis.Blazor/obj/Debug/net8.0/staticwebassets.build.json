@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "z1a4xmgRW8ya+jqkgoFQ6wYF2Duso9lXZgVUfVwdoqM=",
+  "Hash": "kDDnrEZQ/UQXkaPp74p25ZA9Cv5PJvPvp1vZKjACVIQ=",
   "Source": "AudioAnalysis.Blazor",
   "BasePath": "/",
   "Mode": "Root",
@@ -8033,6 +8033,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/audioPlayer.js"
+    },
+    {
+      "Identity": "/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/wwwroot/js/realtime.js",
+      "SourceId": "AudioAnalysis.Blazor",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/wwwroot/",
+      "BasePath": "/",
+      "RelativePath": "js/realtime.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/realtime.js"
     },
     {
       "Identity": "/Users/murayamajunpei/AudioAnalysis/AudioAnalysis.Blazor/wwwroot/sample-data/weather.json",

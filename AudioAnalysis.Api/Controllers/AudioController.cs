@@ -1,4 +1,5 @@
 using AudioAnalysis.Api.Models;
+using AudioAnalysis.Api.Services;
 using AudioAnalysis.Core.Interfaces;
 using AudioAnalysis.Core.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +16,42 @@ public class AudioController : ControllerBase
     private const long MaxFileSizeBytes = 52_428_800; // 50 MB
 
     private readonly IAudioAnalysisService _service;
+    private readonly IAiCommentService _aiComment;
     private readonly ILogger<AudioController> _logger;
 
-    public AudioController(IAudioAnalysisService service, ILogger<AudioController> logger)
+    public AudioController(
+        IAudioAnalysisService service,
+        IAiCommentService aiComment,
+        ILogger<AudioController> logger)
     {
         _service = service;
+        _aiComment = aiComment;
         _logger = logger;
+    }
+
+    /// <summary>AI による調性解説を生成（別途呼び出し可能）</summary>
+    [HttpPost("ai-comment")]
+    public async Task<IActionResult> GetAiComment(
+        [FromBody] AiCommentRequest request,
+        CancellationToken ct)
+    {
+        if (!_aiComment.IsAvailable)
+        {
+            return Ok(new AiCommentResponse
+            {
+                Available = false,
+                UnavailableReason = "Anthropic API キーが設定されていません。appsettings.json の Anthropic:ApiKey を設定してください。"
+            });
+        }
+
+        string? comment = await _aiComment.GenerateAsync(
+            request.OverallKey, request.SectionKeys, ct);
+
+        return Ok(new AiCommentResponse
+        {
+            Available = true,
+            Comment = comment
+        });
     }
 
     /// <summary>全解析一括エンドポイント</summary>
