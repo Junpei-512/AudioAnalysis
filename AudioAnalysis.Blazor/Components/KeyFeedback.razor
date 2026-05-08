@@ -11,10 +11,18 @@
     {
         <div class="feedback-editor">
             <select class="select feedback-select" @bind="selectedKey">
-                @foreach (var key in AllKeys)
-                {
-                    <option value="@key">@key</option>
-                }
+                <optgroup label="── 長調 (major) ──">
+                    @foreach (var n in Notes)
+                    {
+                        <option value="@($"{n} major")">@n major</option>
+                    }
+                </optgroup>
+                <optgroup label="── 短調 (minor) ──">
+                    @foreach (var n in Notes)
+                    {
+                        <option value="@($"{n} minor")">@n minor</option>
+                    }
+                </optgroup>
             </select>
             <button class="btn-feedback-ok" @onclick="Confirm">✓ 確定</button>
             <button class="btn-feedback-cancel" @onclick="Cancel">✕</button>
@@ -40,8 +48,23 @@
     private string? correctedKey;
     private string selectedKey = string.Empty;
 
+    // 半音ごとに シャープ表記 → フラット表記 の順で並べる
+    // 同じ音高でも記譜上の慣習が異なるため両方を選択できるようにする
     private static readonly string[] Notes =
-        ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    [
+        "C",
+        "C#", "D♭",
+        "D",
+        "D#", "E♭",
+        "E",
+        "F",
+        "F#", "G♭",
+        "G",
+        "G#", "A♭",
+        "A",
+        "A#", "B♭",
+        "B",
+    ];
 
     private static readonly string[] AllKeys =
         Notes.Select(n => $"{n} major").Concat(Notes.Select(n => $"{n} minor")).ToArray();

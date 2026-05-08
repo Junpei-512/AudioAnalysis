@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "AudioAnalysis.Blazor",
   "resources": {
-    "hash": "sha256-xa8OACyxfEZfakQBCHUD/vCnjPiddN0N5+WHVCp7RP4=",
+    "hash": "sha256-ybTWCZAFC4AecxMdqnEYziC+06n9KBb/VOzTsa2JIgM=",
     "jsModuleNative": {
       "dotnet.native.8.0.15.02kohm2n3v.js": "sha256-ftpNqtARtVNE8ku5eB/jXoklb41UQ+EutUHfwmbNTBY="
     },
@@ -208,12 +208,12 @@
       "mscorlib.wasm": "sha256-BeLfFpg9iS3DkEdywsYY7sV6ML3knqkMaMq0JBEbWlw=",
       "netstandard.wasm": "sha256-VkjUtJ6DK5bFTc2JwwGHmQY3tBcNSC7zMSJXuiXcnJA=",
       "System.Private.CoreLib.wasm": "sha256-VIQEPUSb48N39LR+ncGDP5xU02xuRbyZU8MhMho26wQ=",
-      "AudioAnalysis.Core.wasm": "sha256-uazw+/DoPsVZfmZ2KR0N2tps42L/b/DBDxdZP2cp8sI=",
-      "AudioAnalysis.Blazor.wasm": "sha256-q6D+xWEUBrui6MbkKjftw4h3NxUSwHMUtenssU5adsc="
+      "AudioAnalysis.Core.wasm": "sha256-bd21eaqREX2JrV2AeOjufr/tmIw8Tajf3SIu1LMB6w8=",
+      "AudioAnalysis.Blazor.wasm": "sha256-ToqhKw+UWW2Yw2M32lqXWtmTAagK0CXmL6AWgfrb96w="
     },
     "pdb": {
-      "AudioAnalysis.Core.pdb": "sha256-/D6byNSoMnzTFgQByf0TWzOQehLiGH6sy6wNrrkTPTI=",
-      "AudioAnalysis.Blazor.pdb": "sha256-MXyEwxhDYPIauEcTmXI/Ph+cMySSsDbZoqA0UspD9GQ="
+      "AudioAnalysis.Core.pdb": "sha256-MjnTpvOZh2rznIRdXavLYZj+/wGSfTFYNCZdBaXMNGg=",
+      "AudioAnalysis.Blazor.pdb": "sha256-k90jKjMa0gimNfmmDen5ka1KlBSxP7Ax9bZkQYkIfSQ="
     }
   },
   "cacheBootResources": true,
